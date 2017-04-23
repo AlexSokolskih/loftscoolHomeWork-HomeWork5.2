@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <?php var_dump($data)?>
+
+
+        {% for row in data %}
+            <div class="row">
+              <div class="col-md-4">
+                  <p>{{ row }}</p>
+              </div>
+            </div>
+        {% endfor %}
+
+
+{% endblock %}

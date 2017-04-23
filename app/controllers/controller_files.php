@@ -6,12 +6,12 @@
  * Date: 17.04.2017
  * Time: 22:33
  */
-class Controller_users extends Controller
+class Controller_files extends Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->model  =  new Model_users();
+        $this->model  =  new Model_files();
     }
 
 
@@ -23,10 +23,11 @@ class Controller_users extends Controller
             exit;
         }
         $data = $this->model->get_data();
+        var_dump($data);
 
-        $this->view->generate('users_view.twig',
+        $this->view->generate('files_view.twig',
             array(
-                'title'=>'Пользователи',
+                'title'=>'файлы',
                 'data'=> $data
             ));
     }
