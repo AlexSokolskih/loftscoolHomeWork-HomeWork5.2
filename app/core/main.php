@@ -7,6 +7,8 @@
  */
 class Main
 {
+    public static $myConfig = array('from_name' => 'приложение', 'adminEmail' => 'xaam1@ya.ru');
+
     public function showHeader($activPage = '')
     {
         $filelistActive = '';
