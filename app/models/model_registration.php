@@ -8,6 +8,20 @@
  */
 class Model_registration extends Model
 {
+    public static $recapthaSecret = "6LdyPSQUAAAAAAuWnDT2vBYXIetZQ7pavcvWZbsX";
+
+    private function recaptca(){
+        $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+        $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
+        if ($resp->isSuccess()) {
+            // verified!
+            // if Domain Name Validation turned off don't forget to check hostname field
+            // if($resp->getHostName() === $_SERVER['SERVER_NAME']) {  }
+        } else {
+            $errors = $resp->getErrorCodes();
+        }
+    }
+
     public function get_data()
     {
         $dataBase =new DataBase();
@@ -37,57 +51,24 @@ class Model_registration extends Model
             $message = 'Ошибка Пустое поле ';
         } elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
             $message = 'Добавлен успешно';
-/*
-            $mail->SMTPDebug = 3;
-
-            $mail->isSMTP();                                    // Set mailer to use SMTP
-            $mail->CharSet ='UTF-8';
-            $mail->Host = 'smtp.yandex.ru';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'xaam1@yandex.ru';                 // SMTP username
-            $mail->Password = '159SokolSila';                           // SMTP password
-            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 465;
-            $mail->setLanguage('ru');
 
 
-            $mail->setFrom('xaam1@ya.ru', 'qqqqqqq');
-            $mail->addAddress('xaam1@ya.ru', 'Joe User');     // Add a recipient
-
-
-
-                                       // Set email format to HTML
-
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-*/
             $mail->SMTPDebug = 6;
-            $mail->isSMTP();                                             // Set mailer to use SMTP
-            $mail->CharSet  = 'UTF-8';
-            $mail->SMTPOptions = [ 'ssl' => [ 'verify_peer' => false ] ];
+            $mail->IsSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = "tls";
 
-            $mail->Host       = 'smtp.yandex.ru';   // Specify main and backup SMTP servers
-            $mail->SMTPAuth   = true;                                    // Enable SMTP authentication
-            $mail->Username   = 'loft.loft2018@yandex.ru';                      // SMTP username
-            $mail->Password   = '3kfn44lnd442K';                                // SMTP password
-            $mail->SMTPSecure = 'ssl';                                   // Enable TLS encryption, `ssl` also accepted
-            $mail->Port       = 465;                                     // TCP port to connect to
-            $mail->setLanguage('ru');
+            $mail->Host = "smtp.yandex.ru";
+            $mail->Port = 587;
+            $mail->Username = 'vasya.qa2018@yandex.ru';                 // SMTP username
+            $mail->Password = 'qwerasdfzxcv';
+            $mail->SetFrom("myemail@gmail.com");
 
-            $mail->setFrom('loft.loft2018@yandex.ru', 'Из курса по PHP');
-            $mail->addAddress('agoalofalife@gmail.com', 'Илья Чубаров');
             $mail->addAddress('xaam1@ya.ru', 'Илья Чубаров2');// Add a recipient
+            $mail->Subject = "Requested link";
+            $mail->Body = "Dear $name,\n\nYou have requested to reset your password .
+                       \n\nTo reset your password, please click the link below.\n\n".$reset_url."\n\nThank you!";
 
-
-//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            $mail->isHTML(true);                                  // Set email format to HTML
-
-            $mail->Subject = 'Это будет в превью';
-            $mail->Body    = 'Если HTML включен будет  <b>жирным!</b>';
-            $mail->AltBody = 'Если клиент не поддерживает HTML';
 
             if(!$mail->send()) {
                 $message .= 'Mailer Error: ' . $mail->ErrorInfo;
