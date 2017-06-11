@@ -10,16 +10,28 @@ class Model_registration extends Model
 {
     public static $recapthaSecret = "6LdyPSQUAAAAAAuWnDT2vBYXIetZQ7pavcvWZbsX";
 
-    private function recaptca(){
-        $recaptcha = new \ReCaptcha\ReCaptcha($secret);
-        $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
-        if ($resp->isSuccess()) {
-            // verified!
-            // if Domain Name Validation turned off don't forget to check hostname field
-            // if($resp->getHostName() === $_SERVER['SERVER_NAME']) {  }
+    public static function recaptca(){
+        $flag=false;
+        if (isset($_POST['g-recaptcha-response'])) {
+            $recaptcha = new \ReCaptcha\ReCaptcha(Model_registration::$recapthaSecret);
+            $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+
+            if ($resp->isSuccess()){
+                $flag=true;
+                // действия, если код captcha прошёл проверку
+                //...
+            } else {
+                // иначе передать ошибку
+                $errors = $resp->getErrorCodes();
+                $data['error-captcha']=$errors;
+                $data['msg']='Код капчи не прошёл проверку на сервере';
+                $data['result']='error';
+            }
         } else {
-            $errors = $resp->getErrorCodes();
+            //ошибка, не существует ассоциативный массив $_POST["send-message"]
+            $data['result']='error';
         }
+        return $flag;
     }
 
     public function get_data()
@@ -49,7 +61,9 @@ class Model_registration extends Model
             $message = 'Ошибка Такой пользователь существует ';
         } elseif ($newLogin == '' or $password1 == '') {
             $message = 'Ошибка Пустое поле ';
-        } elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
+        } elseif (!Model_registration::recaptca()) {
+            $message = 'рекапчу не разгадал ';
+        }elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
             $message = 'Добавлен успешно';
 
 
@@ -62,7 +76,7 @@ class Model_registration extends Model
             $mail->Port = 587;
             $mail->Username = 'vasya.qa2018@yandex.ru';                 // SMTP username
             $mail->Password = 'qwerasdfzxcv';
-            $mail->SetFrom("myemail@gmail.com");
+            $mail->SetFrom("vasya.qa2018@yandex.ru");
 
             $mail->addAddress('xaam1@ya.ru', 'Илья Чубаров2');// Add a recipient
             $mail->Subject = "Requested link";
