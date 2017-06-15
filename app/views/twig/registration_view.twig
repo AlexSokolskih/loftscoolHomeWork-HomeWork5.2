@@ -4,7 +4,7 @@
     <h2>{{ title }}</h2>
     <h2>{{ message }}</h2>
 
-   <!-- 6LdyPSQUAAAAAF6BcI20e8b41a4S-gR5bMg6B6CK  -->
+    <!-- 6LdyPSQUAAAAAF6BcI20e8b41a4S-gR5bMg6B6CK  -->
     <div class="form-container">
         <form class="form-horizontal" action="/registration" method="post">
             <div class="form-group">
@@ -41,19 +41,19 @@
     </div>
 
 
-        {% for row in data %}
-            <div class="row">
-              <div class="col-md-4">
-                  <p>_______________________________________</p>
+    {% for row in data %}
+        <div class="row">
+            <div class="col-md-4">
+                <p>_______________________________________</p>
 
-                  <p>year: {{ row.age }}</p>
-                  <p>adulthood: {{ row.adulthood }}</p>
-                  <p>description: {{ row.description  }}</p>
-                  <p>id: {{ row.id }} </p>
-                  <p><img src="/assets/template/img/{{ row.photo }}" width="300" alt="">  </p>
-              </div>
+                <p>year: {{ row.age }}</p>
+                <p>adulthood: {{ row.adulthood }}</p>
+                <p>description: {{ row.description }}</p>
+                <p>id: {{ row.id }} </p>
+                <p><img src="/assets/template/img/{{ row.photo }}" width="300" alt=""></p>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
 
 
 {% endblock %}

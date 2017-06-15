@@ -2,16 +2,26 @@
 
 {% block content %}
     <h2>{{ title }}</h2>
-    <?php var_dump($data)?>
 
 
-        {% for row in data %}
-            <div class="row">
-              <div class="col-md-4">
-                  <p>{{ row }}</p>
-              </div>
-            </div>
-        {% endfor %}
+    {% for row in data %}
+        <div class="row">
+            <form action="#/files/" method="post">
+                <div class="col-md-4">
+                    <p>{{ row }}</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="/assets/template/img/{{ row }}" alt="{{ row }}" width="200">
+                    <input type="hidden" value="{{ row }}" name="imageFile">
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" value="изменить изображение">
+
+                </div>
+            </form>
+
+        </div>
+    {% endfor %}
 
 
 {% endblock %}

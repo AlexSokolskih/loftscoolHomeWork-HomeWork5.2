@@ -11,7 +11,7 @@ class Controller_users extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->model  =  new Model_users();
+        $this->model = new Model_users();
     }
 
 
@@ -26,8 +26,8 @@ class Controller_users extends Controller
 
         $this->view->generate('users_view.twig',
             array(
-                'title'=>'Пользователи',
-                'data'=> $data
+                'title' => 'Пользователи',
+                'data' => $data
             ));
     }
 

@@ -10,33 +10,34 @@ class Model_registration extends Model
 {
     public static $recapthaSecret = "6LdyPSQUAAAAAAuWnDT2vBYXIetZQ7pavcvWZbsX";
 
-    public static function recaptca(){
-        $flag=false;
+    public static function recaptca()
+    {
+        $flag = false;
         if (isset($_POST['g-recaptcha-response'])) {
             $recaptcha = new \ReCaptcha\ReCaptcha(Model_registration::$recapthaSecret);
             $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-            if ($resp->isSuccess()){
-                $flag=true;
+            if ($resp->isSuccess()) {
+                $flag = true;
                 // действия, если код captcha прошёл проверку
                 //...
             } else {
                 // иначе передать ошибку
                 $errors = $resp->getErrorCodes();
-                $data['error-captcha']=$errors;
-                $data['msg']='Код капчи не прошёл проверку на сервере';
-                $data['result']='error';
+                $data['error-captcha'] = $errors;
+                $data['msg'] = 'Код капчи не прошёл проверку на сервере';
+                $data['result'] = 'error';
             }
         } else {
             //ошибка, не существует ассоциативный массив $_POST["send-message"]
-            $data['result']='error';
+            $data['result'] = 'error';
         }
         return $flag;
     }
 
     public function get_data()
     {
-        $dataBase =new DataBase();
+        $dataBase = new DataBase();
         $main = new Main();
         $mail = new PHPMailer();
         $password1 = '';
@@ -63,7 +64,7 @@ class Model_registration extends Model
             $message = 'Ошибка Пустое поле ';
         } elseif (!Model_registration::recaptca()) {
             $message = 'рекапчу не разгадал ';
-        }elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
+        } elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
             $message = 'Добавлен успешно';
 
 
@@ -81,10 +82,10 @@ class Model_registration extends Model
             $mail->addAddress('xaam1@ya.ru', 'Илья Чубаров2');// Add a recipient
             $mail->Subject = "Requested link";
             $mail->Body = "Dear $name,\n\nYou have requested to reset your password .
-                       \n\nTo reset your password, please click the link below.\n\n".$reset_url."\n\nThank you!";
+                       \n\nTo reset your password, please click the link below.\n\n" . $reset_url . "\n\nThank you!";
 
 
-            if(!$mail->send()) {
+            if (!$mail->send()) {
                 $message .= 'Mailer Error: ' . $mail->ErrorInfo;
             } else {
                 $message .= 'Message has been sent';

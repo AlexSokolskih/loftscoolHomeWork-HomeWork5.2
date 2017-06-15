@@ -1,6 +1,7 @@
 <?php
 
 /* base_view.twig */
+
 class __TwigTemplate_0f51b68a87930a8da6ecc48452061017ced393dba394d4ede7da4408dfa78223 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -50,7 +51,7 @@ class __TwigTemplate_0f51b68a87930a8da6ecc48452061017ced393dba394d4ede7da4408dfa
 
     public function getDebugInfo()
     {
-        return array (  36 => 5,  31 => 4,  28 => 3,  11 => 1,);
+        return array(36 => 5, 31 => 4, 28 => 3, 11 => 1,);
     }
 }
 /* {% extends 'layout.twig' %}*/

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Alex
@@ -55,6 +56,7 @@ class Main
       </div>
     </nav>';
     }
+
     public function showFuter()
     {
         echo '<!-- Bootstrap core JavaScript
@@ -64,6 +66,7 @@ class Main
     <script src="../js/main.js"></script>
     <script src="../js/bootstrap.min.js"></script>';
     }
+
     public function savePhoto()
     {
         // TODO! добавить ресайз изображений
@@ -99,17 +102,19 @@ class Main
         $filename = date('U') . rand(1, 100000);
         move_uploaded_file($file['tmp_name'], 'photos/' . $filename . '.' . $extension);
         $imageSize = getimagesize('photos/' . $filename . '.' . $extension);
-        $image_p = imagecreatetruecolor($imageSize[0]-1, $imageSize[1]);
+        $image_p = imagecreatetruecolor($imageSize[0] - 1, $imageSize[1]);
         $image = imagecreatefromjpeg('photos/' . $filename . '.' . $extension);
         imagecopyresampled($image_p, $image, 0, 0, 0, 0, $imageSize[0], $imageSize[1], $imageSize[0], $imageSize[1]);
         imagejpeg($image_p, 'photos/' . $filename . '.' . $extension, 100);
         return $filename . '.' . $extension;
     }
+
     public function cpyptPassword($password)
     {
         $criptPassword = crypt($password, '$6$naborSimvolovForSalt');
         return $criptPassword;
     }
+
     public function deletefileImage($filename)
     {
         unlink('photos/' . $filename);

@@ -1,10 +1,12 @@
 <?php
-class Controller_Portfolio extends Controller {
+
+class Controller_Portfolio extends Controller
+{
 
     function __construct()
     {
         parent::__construct();
-        $this->model  =  new Model_Portfolio();
+        $this->model = new Model_Portfolio();
     }
 
     public function action_index()
@@ -13,8 +15,8 @@ class Controller_Portfolio extends Controller {
 
         $this->view->generate('portfolio_view.twig',
             array(
-                'title'=>'Портфолио',
-                'data'=> $data
+                'title' => 'Портфолио',
+                'data' => $data
             ));
     }
 

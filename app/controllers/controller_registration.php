@@ -11,7 +11,7 @@ class Controller_registration extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->model  =  new Model_registration();
+        $this->model = new Model_registration();
     }
 
 
@@ -22,8 +22,8 @@ class Controller_registration extends Controller
 
         $this->view->generate('registration_view.twig',
             array(
-                'title'=>'Зарегистрируйтесь',
-                'message'=>$data
+                'title' => 'Зарегистрируйтесь',
+                'message' => $data
             ));
     }
 

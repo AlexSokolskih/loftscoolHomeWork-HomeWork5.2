@@ -11,7 +11,7 @@ class Controller_files extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->model  =  new Model_files();
+        $this->model = new Model_files();
     }
 
 
@@ -23,12 +23,11 @@ class Controller_files extends Controller
             exit;
         }
         $data = $this->model->get_data();
-        var_dump($data);
 
         $this->view->generate('files_view.twig',
             array(
-                'title'=>'файлы',
-                'data'=> $data
+                'title' => 'файлы',
+                'data' => $data
             ));
     }
 
