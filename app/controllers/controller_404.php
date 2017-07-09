@@ -7,7 +7,7 @@ class Controller_404 extends Controller
     {
         $this->view->generate('base_view.twig',
             [
-                'title' => 'Ошибка 404!',
+                 'title' => 'Ошибка 404!',
                 'content' => 'Данной страницы не существует!!!'
             ]);
     }
