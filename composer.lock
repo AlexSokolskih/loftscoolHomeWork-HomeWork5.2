@@ -122,12 +122,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "274403ce35bec3c419fdeedcd161c98dc02d3467"
+                "reference": "4581c28cdcb6067dca2b27ea8b76842ca79ddf90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/274403ce35bec3c419fdeedcd161c98dc02d3467",
-                "reference": "274403ce35bec3c419fdeedcd161c98dc02d3467",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/4581c28cdcb6067dca2b27ea8b76842ca79ddf90",
+                "reference": "4581c28cdcb6067dca2b27ea8b76842ca79ddf90",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.2",
-                "phpunit/phpunit": "3.*"
+                "phpunit/phpunit": "^4.8 || ^5.7"
             },
             "suggest": {
                 "ext-gd": "to use GD library based image processing.",
@@ -170,8 +170,8 @@
             "authors": [
                 {
                     "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.net",
-                    "homepage": "http://olivervogel.net/"
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
                 }
             ],
             "description": "Image handling and manipulation library with support for Laravel integration",
@@ -184,7 +184,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2017-06-07 17:18:28"
+            "time": "2017-07-04 16:10:28"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -192,12 +192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "29b2042fd1a5cbb987a26f0db1b0ba5af302f920"
+                "reference": "c35694d65fb94149b61ba0e9068724460b156462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/29b2042fd1a5cbb987a26f0db1b0ba5af302f920",
-                "reference": "29b2042fd1a5cbb987a26f0db1b0ba5af302f920",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c35694d65fb94149b61ba0e9068724460b156462",
+                "reference": "c35694d65fb94149b61ba0e9068724460b156462",
                 "shasum": ""
             },
             "require": {
@@ -261,7 +261,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-06-13 11:59:32"
+            "time": "2017-06-21 12:00:22"
         },
         {
             "name": "psr/http-message",
